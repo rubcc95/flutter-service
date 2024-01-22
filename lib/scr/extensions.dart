@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:service/scr/notifications.dart';
-import 'package:service/scr/services.dart';
-import 'package:service/scr/widgets.dart';
+import 'notifications.dart';
+import 'services.dart';
+import 'widgets.dart';
 
 extension ServiceBuildContextExtension on BuildContext {  
   T? read<T>() {

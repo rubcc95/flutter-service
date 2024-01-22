@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:service/scr/services.dart';
+import 'services.dart';
 
 class ServiceNotification<T> extends Notification {
   const ServiceNotification();

@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:service/scr/services.dart';
+import 'services.dart';
 
 class ServiceWidget<T> extends InheritedWidget {
   const ServiceWidget({super.key, required super.child, required this.init});

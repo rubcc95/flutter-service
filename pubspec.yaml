@@ -1,11 +1,14 @@
-name: service
-description: "A new Flutter package project."
-version: 0.0.1
-homepage:
-
+name: service_framework
+description: Another state management wrapper for InheritedElements.
+version: 0.0.1-dev.1
+homepage: https://github.com/rubcc95/flutter-service
+issue_tracker: https://github.com/rubcc95/flutter-service/issues
+topics:
+  - state-management  
+  - http
 environment:
-  sdk: '>=3.3.0-91.0.dev <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: ">=2.17.0 <4.0.0"
+  flutter: ">=1.16.0"
 
 dependencies:
   flutter:

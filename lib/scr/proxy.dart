@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:service/scr/extensions.dart';
-import 'package:service/scr/services.dart';
+import 'extensions.dart';
+import 'services.dart';
 
 mixin ProxyServiceMixin<T> on Service {
   bool proxyUpdateShouldNotify(T? value);

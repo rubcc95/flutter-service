@@ -1,3 +1,5 @@
+library service;
+
 export 'scr/extensions.dart';
 export 'scr/notifications.dart' hide ServiceNotification;
 export 'scr/proxy.dart';

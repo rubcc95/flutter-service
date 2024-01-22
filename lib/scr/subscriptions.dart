@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:service/scr/services.dart';
+import 'services.dart';
 
 typedef SubscriptionCallback = VoidCallback Function(
     VoidCallback removeSubscription);
@@ -34,9 +34,9 @@ mixin SubscriptableServiceMixin on Service {
             onError: cancelOnError
                 ? onError == null
                     ? (Object error, StackTrace stackTrace) {
-                      removeSubscription();
-                      Error.throwWithStackTrace(error, stackTrace);
-                    }
+                        removeSubscription();
+                        Error.throwWithStackTrace(error, stackTrace);
+                      }
                     : (Object error, StackTrace stackTrace) {
                         removeSubscription();
                         onError(error, stackTrace);
@@ -64,7 +64,7 @@ mixin SubscriptableServiceMixin on Service {
                 ? (error, stackTrace) {
                     if (canceled) return;
                     removeSubscription();
-                    Error.throwWithStackTrace(error, stackTrace);                    
+                    Error.throwWithStackTrace(error, stackTrace);
                   }
                 : (error, stackTrace) {
                     removeSubscription();
