@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:service_framework/scr/widgets.dart';
+import 'package:service_framework/scr/widgets/widget.dart';
 
 class MultiServiceWidget extends StatelessWidget {
   final List<ServiceWidget> services;

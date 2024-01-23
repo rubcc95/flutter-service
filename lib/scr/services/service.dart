@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
-import 'widgets.dart';
+import '../widgets/widget.dart';
 
 typedef ServiceListenCondition<T extends Service> = bool Function(T service);
 
 typedef _InternalServiceListenCondition = bool Function(Service service);
 
 class ServiceNotification<T extends Service> extends Notification {
-  const ServiceNotification();  
+  const ServiceNotification();
 
   Type get type => T;
 }
@@ -67,7 +67,11 @@ extension ServiceBuildContextExtension on BuildContext {
     return res as T;
   }
 
-  void listen<T extends Service>([ServiceListenCondition<T>? condition]) => dependOnInheritedWidgetOfExactType<ServiceWidget<T>>(aspect: condition == null ? null : (Service service) => condition(service as T));  
+  void listen<T extends Service>([ServiceListenCondition<T>? condition]) =>
+      dependOnInheritedWidgetOfExactType<ServiceWidget<T>>(
+          aspect: condition == null
+              ? null
+              : (Service service) => condition(service as T));
 
   void notify<T extends Service>() {
     const ServiceNotification<T> notification = ServiceNotification();

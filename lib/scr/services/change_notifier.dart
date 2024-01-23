@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'service.dart';
-import 'subscriptions.dart';
+import 'subscription.dart';
 
 class ChangeNotifierService<T extends ChangeNotifier>
     extends SubscriptableService {
@@ -16,6 +16,8 @@ class ChangeNotifierService<T extends ChangeNotifier>
 }
 
 extension ChangeNotifierServiceBuildContextExtensions on BuildContext {
-  ChangeNotifierService<T> readChangeNotifier<T extends ChangeNotifier>() => read();
-  void listenChangeNotifier<T extends ChangeNotifier>() => listen<ChangeNotifierService<T>>();  
+  ChangeNotifierService<T> readChangeNotifier<T extends ChangeNotifier>() =>
+      read();
+  void listenChangeNotifier<T extends ChangeNotifier>() =>
+      listen<ChangeNotifierService<T>>();
 }

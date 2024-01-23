@@ -1,11 +1,10 @@
-import 'dart:collection';
-
 import 'package:flutter/widgets.dart';
-import 'change_notifier.dart';
-import 'future.dart';
-import 'multi_service.dart';
-import 'service.dart';
-import 'streams.dart';
+
+import '../services/change_notifier.dart';
+import '../services/future.dart';
+import 'multi.dart';
+import '../services/service.dart';
+import '../services/stream.dart';
 
 typedef CreateServiceCallback<T extends Service> = T Function(
     InheritedWidget widget);
@@ -58,17 +57,4 @@ class ServiceWidget<T extends Service> extends Widget
 
   ServiceWidget<T> _rebuild(Widget newChild) =>
       ServiceWidget(key: key, init: init, child: newChild);
-}
-
-typedef ConsumeServiceCallback<T extends Service> = Widget Function(T? value);
-
-class ServiceConsumer<T extends Service> extends StatelessWidget {
-  const ServiceConsumer(this.builder, {super.key, this.condition});
-
-  final ConsumeServiceCallback<T> builder;
-  final ServiceListenCondition<T>? condition;
-
-  @override
-  Widget build(BuildContext context) =>
-      builder((context..listen<T>(condition)).read<T>());
 }

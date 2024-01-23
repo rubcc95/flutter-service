@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'service.dart';
-import 'streams.dart';
-import 'subscriptions.dart';
+import 'stream.dart';
+import 'subscription.dart';
 
 class FutureService<T> extends SubscriptableService {
   T? _value;

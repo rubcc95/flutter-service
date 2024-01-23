@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'service.dart';
-import 'subscriptions.dart';
+import 'subscription.dart';
 
 enum ServiceStreamState { waiting, active, done }
 

@@ -8,8 +8,7 @@ typedef DataCallback<T> = void Function(T data);
 typedef DoneCallback = void Function();
 typedef ErrorCallback = void Function(Object error, StackTrace stackTrace);
 
-
-mixin SubscriptableServiceMixin on Service{
+mixin SubscriptableServiceMixin on Service {
   final List<VoidCallback> _cancelCallbacks = [];
 
   VoidCallback addSubscription(SubscriptionCallback builder) {
@@ -81,13 +80,13 @@ mixin SubscriptableServiceMixin on Service{
         changeNotifier.addListener(onChange);
         return () => changeNotifier.removeListener(onChange);
       });
-  
+
   @override
   void unmount() {
     for (final callback in _cancelCallbacks) {
       callback();
     }
-    _cancelCallbacks.clear();      
+    _cancelCallbacks.clear();
     super.unmount();
   }
 }
