@@ -1,5 +1,14 @@
+import 'dart:collection';
+
 import 'package:flutter/widgets.dart';
+import 'change_notifier.dart';
+import 'future.dart';
+import 'multi_service.dart';
 import 'service.dart';
+import 'streams.dart';
+
+typedef CreateServiceCallback<T extends Service> = T Function(
+    InheritedWidget widget);
 
 class ServiceWidget<T extends Service> extends Widget
     implements InheritedWidget {
@@ -13,8 +22,26 @@ class ServiceWidget<T extends Service> extends Widget
           {required List<ServiceWidget> services, required Widget child}) =>
       MultiServiceWidget(services: services, child: child);
 
+  static ServiceWidget<StreamService<T>> stream<T>(Stream<T> stream,
+          {required T initialValue}) =>
+      ServiceWidget(
+          init: (widget) => StreamService(widget,
+              stream: stream, initialValue: initialValue));
+
+  static ServiceWidget<FutureService<T>> future<T>(Future<T> future,
+          {required T initialValue}) =>
+      ServiceWidget(
+          init: (widget) => FutureService(widget,
+              future: future, initialValue: initialValue));
+
+  static ServiceWidget<ChangeNotifierService<T>> changeNotifier<
+          T extends ChangeNotifier>(T changeNotifier) =>
+      ServiceWidget(
+          init: (widget) =>
+              ChangeNotifierService(widget, changeNotifier: changeNotifier));
+
   final Widget? maybeChild;
-  final T Function(Widget widget) init;
+  final CreateServiceCallback<T> init;
 
   @override
   Widget get child {
@@ -33,29 +60,12 @@ class ServiceWidget<T extends Service> extends Widget
       ServiceWidget(key: key, init: init, child: newChild);
 }
 
-class MultiServiceWidget extends StatelessWidget {
-  final List<ServiceWidget> services;
-  final Widget child;
-
-  const MultiServiceWidget(
-      {super.key, required this.services, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    Widget res = child;
-    for (var i = services.length; i > 0; --i) {
-      res = services[i]._rebuild(res);
-    }
-    return res;
-  }
-}
-
-typedef ServiceBuilder<T extends Service> = Widget Function(T? value);
+typedef ConsumeServiceCallback<T extends Service> = Widget Function(T? value);
 
 class ServiceConsumer<T extends Service> extends StatelessWidget {
   const ServiceConsumer(this.builder, {super.key, this.condition});
 
-  final ServiceBuilder<T> builder;
+  final ConsumeServiceCallback<T> builder;
   final ServiceListenCondition<T>? condition;
 
   @override
