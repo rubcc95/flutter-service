@@ -10,7 +10,7 @@ import '../services/stream.dart';
 typedef CreateServiceCallback<T extends Service> = T Function(
     InheritedWidget widget);
 
-class ServiceWidget<T extends Service> extends Widget
+final class ServiceWidget<T extends Service> extends Widget
     implements InheritedWidget {
   const ServiceWidget({
     super.key,
@@ -49,7 +49,7 @@ class ServiceWidget<T extends Service> extends Widget
   @override
   Widget get child {
     assert(_maybeChild != null,
-        '$ServiceWidget must have a child if is not nesed inside a ${ServiceWidget.multi} constructor');
+        '$ServiceWidget must have a child if is not nested inside a ${ServiceWidget.multi} constructor');
     return _maybeChild!;
   }
 

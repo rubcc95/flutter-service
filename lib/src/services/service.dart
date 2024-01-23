@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import '../widgets/widget.dart';
 
 typedef ServiceListenCondition<T extends Service> = bool Function(T service);

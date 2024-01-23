@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:service_framework/service_framework.dart';
+import 'package:service_framework/services.dart';
 
 import '../fake_server/fake_server.dart';
 

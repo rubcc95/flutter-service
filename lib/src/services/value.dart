@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:service_framework/scr/services/service.dart';
+import 'package:service_framework/src/services/service.dart';
 
 class ValueService<T> extends Service {
   final T value;
