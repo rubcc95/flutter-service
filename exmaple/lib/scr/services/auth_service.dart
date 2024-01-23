@@ -5,7 +5,7 @@ import '../fake_server/fake_server.dart';
 
 final server = FakeServer();
 
-class AuthService extends NotifiableService with SubscriptableServiceMixin {
+class AuthService extends SubscriptableService {
   AuthService(super.widget);
 
   FakeUser? _user;

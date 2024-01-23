@@ -1,9 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'service.dart';
 
-class _ValueStreamService<T> = StreamService<T>
-    with DeferredValueServiceMixin<T?>;
-
 class ServiceWidget<T extends Service> extends Widget
     implements InheritedWidget {
   const ServiceWidget({
@@ -53,9 +50,9 @@ class MultiServiceWidget extends StatelessWidget {
   }
 }
 
-typedef ServiceBuilder<T> = Widget Function(T? value);
+typedef ServiceBuilder<T extends Service> = Widget Function(T? value);
 
-class ServiceConsumer<T> extends StatelessWidget {
+class ServiceConsumer<T extends Service> extends StatelessWidget {
   const ServiceConsumer(this.builder, {super.key, this.condition});
 
   final ServiceBuilder<T> builder;

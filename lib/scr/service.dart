@@ -3,7 +3,6 @@ import 'package:service_framework/scr/subscriptions.dart';
 import 'widgets.dart';
 
 typedef ServiceListenCondition<T extends Service> = bool Function(T service);
-
 typedef InternalServiceListenCondition = bool Function(Service service);
 
 class ServiceNotification<T extends Service> extends Notification {
