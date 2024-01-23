@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'services.dart';
+import 'service.dart';
 
 typedef SubscriptionCallback = VoidCallback Function(
     VoidCallback removeSubscription);
@@ -8,7 +8,8 @@ typedef DataCallback<T> = void Function(T data);
 typedef DoneCallback = void Function();
 typedef ErrorCallback = void Function(Object error, StackTrace stackTrace);
 
-mixin SubscriptableServiceMixin on Service {
+
+mixin SubscriptableServiceMixin on Service{
   final List<VoidCallback> _cancelCallbacks = [];
 
   VoidCallback addSubscription(SubscriptionCallback builder) {
@@ -18,8 +19,9 @@ mixin SubscriptableServiceMixin on Service {
     return cancel;
   }
 
-  VoidCallback addStream<T>(Stream<T> stream, DataCallback<T>? onData,
-          {DoneCallback? onDone,
+  VoidCallback addStream<T>(Stream<T> stream,
+          {DataCallback<T>? onData,
+          DoneCallback? onDone,
           ErrorCallback? onError,
           bool cancelOnError = false}) =>
       addSubscription((removeSubscription) => stream
@@ -45,8 +47,8 @@ mixin SubscriptableServiceMixin on Service {
           )
           .cancel);
 
-  VoidCallback addFuture<T>(Future<T> future, DataCallback<T>? onData,
-          {ErrorCallback? onError}) =>
+  VoidCallback addFuture<T>(Future<T> future,
+          {DataCallback<T>? onData, ErrorCallback? onError}) =>
       addSubscription((removeSubscription) {
         bool canceled = false;
         future.then(
@@ -73,19 +75,19 @@ mixin SubscriptableServiceMixin on Service {
         return () => canceled = true;
       });
 
-  VoidCallback addChangeNotifier(
-          ChangeNotifier changeNotifier, VoidCallback onChange) =>
+  VoidCallback addChangeNotifier(ChangeNotifier changeNotifier,
+          {required VoidCallback onChange}) =>
       addSubscription((removeSubscription) {
         changeNotifier.addListener(onChange);
         return () => changeNotifier.removeListener(onChange);
       });
-
+  
   @override
   void unmount() {
     for (final callback in _cancelCallbacks) {
       callback();
     }
-    _cancelCallbacks.clear();
+    _cancelCallbacks.clear();      
     super.unmount();
   }
 }

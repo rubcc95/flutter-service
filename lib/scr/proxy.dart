@@ -1,23 +1,14 @@
 import 'package:flutter/widgets.dart';
-import 'extensions.dart';
-import 'services.dart';
+import 'service.dart';
 
-mixin ProxyServiceMixin<T> on Service {
-  bool proxyUpdateShouldNotify(T? value);
-
-  @override
-  bool updateShouldNotify() => super.updateShouldNotify() || proxyUpdateShouldNotify(read<T>());
+mixin ProxyServiceMixin<T extends Service> on Service{
+  bool proxyUpdateShouldNotify(T? value) => true;
 
   @override
-  void mount(Element? parent, Object? newSlot) {
-    super.mount(parent, newSlot);
-    listen<T>();
+  void mount(Element? parent, Object? newSlot) {    
+    super.mount(parent, newSlot);    
+    listen<T>(proxyUpdateShouldNotify);
   }
 }
 
-abstract class ProxyService<T> extends Service with ProxyServiceMixin<T>{
-  ProxyService(super.widget);
-  
-  @override
-  bool updateShouldNotify() => proxyUpdateShouldNotify(read<T>());
-}
+class ProxyService<T extends Service> = Service with ProxyServiceMixin<T>;
