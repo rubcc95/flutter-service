@@ -6,6 +6,7 @@ export 'scr/services/proxy.dart';
 export 'scr/services/service.dart';
 export 'scr/services/stream.dart';
 export 'scr/services/subscription.dart';
+export 'scr/services/value.dart';
 
 export 'scr/widgets/consumer.dart';
 export 'scr/widgets/multi.dart';

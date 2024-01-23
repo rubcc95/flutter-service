@@ -27,6 +27,7 @@ class FutureService<T> extends SubscriptableService {
 }
 
 extension FutureServiceBuildContextExtension on BuildContext {
-  StreamService<T> readFuture<T>() => read();
-  void listenFuture<T>() => listen<StreamService<T>>();
+  FutureService<T> readFuture<T>() => read();
+
+  void listenFuture<T>() => listen<FutureService<T>>();
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:service_framework/scr/services/service.dart';
+import '../services/service.dart';
 
 typedef ConsumeServiceCallback<T extends Service> = Widget Function(T? value);
 

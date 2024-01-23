@@ -1,8 +1,9 @@
 import 'package:flutter/widgets.dart';
 
+import 'multi.dart';
 import '../services/change_notifier.dart';
 import '../services/future.dart';
-import 'multi.dart';
+import '../services/value.dart';
 import '../services/service.dart';
 import '../services/stream.dart';
 
@@ -22,13 +23,13 @@ class ServiceWidget<T extends Service> extends Widget
       MultiServiceWidget(services: services, child: child);
 
   static ServiceWidget<StreamService<T>> stream<T>(Stream<T> stream,
-          {required T initialValue}) =>
+          {T? initialValue}) =>
       ServiceWidget(
           init: (widget) => StreamService(widget,
               stream: stream, initialValue: initialValue));
 
   static ServiceWidget<FutureService<T>> future<T>(Future<T> future,
-          {required T initialValue}) =>
+          {T? initialValue}) =>
       ServiceWidget(
           init: (widget) => FutureService(widget,
               future: future, initialValue: initialValue));
@@ -38,6 +39,12 @@ class ServiceWidget<T extends Service> extends Widget
       ServiceWidget(
           init: (widget) =>
               ChangeNotifierService(widget, changeNotifier: changeNotifier));
+  
+  static ServiceWidget<ValueService<T>> value<
+          T>(T value) =>
+      ServiceWidget(
+          init: (widget) =>
+              ValueService(widget, value: value));
 
   final Widget? maybeChild;
   final CreateServiceCallback<T> init;
