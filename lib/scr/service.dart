@@ -3,7 +3,8 @@ import 'package:service_framework/scr/subscriptions.dart';
 import 'widgets.dart';
 
 typedef ServiceListenCondition<T extends Service> = bool Function(T service);
-typedef InternalServiceListenCondition = bool Function(Service service);
+
+typedef _InternalServiceListenCondition = bool Function(Service service);
 
 class ServiceNotification<T extends Service> extends Notification {
   const ServiceNotification();  
@@ -25,7 +26,7 @@ abstract class Service extends InheritedElement with NotifiableElementMixin {
   @override
   void notifyDependent(covariant InheritedWidget oldWidget, Element dependent) {
     final condition =
-        getDependencies(dependent) as InternalServiceListenCondition?;
+        getDependencies(dependent) as _InternalServiceListenCondition?;
     if (condition == null || condition(this) == true) {
       dependent.didChangeDependencies();
     }
