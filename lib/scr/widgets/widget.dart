@@ -16,7 +16,7 @@ class ServiceWidget<T extends Service> extends Widget
     super.key,
     required this.init,
     Widget? child,
-  }) : maybeChild = child;
+  }) : _maybeChild = child;
 
   static Widget multi(
           {required List<ServiceWidget> services, required Widget child}) =>
@@ -39,20 +39,18 @@ class ServiceWidget<T extends Service> extends Widget
       ServiceWidget(
           init: (widget) =>
               ChangeNotifierService(widget, changeNotifier: changeNotifier));
-  
-  static ServiceWidget<ValueService<T>> value<
-          T>(T value) =>
-      ServiceWidget(
-          init: (widget) =>
-              ValueService(widget, value: value));
 
-  final Widget? maybeChild;
+  static ServiceWidget<ValueService<T>> value<T>(T value) =>
+      ServiceWidget(init: (widget) => ValueService(widget, value: value));
+
+  final Widget? _maybeChild;
   final CreateServiceCallback<T> init;
 
   @override
   Widget get child {
-    assert(maybeChild != null);
-    return maybeChild!;
+    assert(_maybeChild != null,
+        '$ServiceWidget must have a child if is not nesed inside a ${ServiceWidget.multi} constructor');
+    return _maybeChild!;
   }
 
   @override
@@ -61,7 +59,4 @@ class ServiceWidget<T extends Service> extends Widget
   @override
   bool updateShouldNotify(covariant InheritedWidget oldWidget) =>
       throw StateError('Handled internally');
-
-  ServiceWidget<T> _rebuild(Widget newChild) =>
-      ServiceWidget(key: key, init: init, child: newChild);
 }
