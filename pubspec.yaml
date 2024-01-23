@@ -1,4 +1,4 @@
-name: service_framework
+name: refs
 description: Another state management wrapper for InheritedElements.
 version: 0.0.1-dev.2
 repository: https://github.com/rubcc95/flutter-service

@@ -1,4 +1,4 @@
-library services;
+library refs;
 
 export 'src/services/change_notifier.dart';
 export 'src/services/future.dart';
