@@ -1,5 +1,5 @@
-name: refs
-description: Another state management wrapper for InheritedElements.
+name: supplier
+description: Another state management wrapper for InheritedElements. Allow async operations inside widgets rebuilding only the desired subtrees with few lines.
 version: 0.0.1-dev.2
 repository: https://github.com/rubcc95/flutter-service
 issue_tracker: https://github.com/rubcc95/flutter-service/issues

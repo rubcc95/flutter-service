@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:refs/refs.dart';
+import 'package:supplier/supplier.dart';
 
 import '../fake_server/fake_server.dart';
 
 final server = FakeServer();
 
-class AuthService extends SubscriptableService {
+class AuthService extends ServedSubscriptor {
   AuthService(super.widget);
 
   FakeUser? _user;
@@ -28,7 +28,7 @@ class AuthService extends SubscriptableService {
   //really similar to logIn
   void logOut(String name) {
     if (inProcess || !hasUser) return;
-
+    
     _cancelProcess = addFuture(server.logOut(), onData: (_) {
       _cancelProcess = null;
       _user = null;

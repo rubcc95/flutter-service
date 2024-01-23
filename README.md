@@ -1,2 +1,2 @@
-# flutter-service
+# Supplier
 Another implementation for Inherited Widgets

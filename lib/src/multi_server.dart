@@ -1,18 +1,18 @@
 import 'package:flutter/widgets.dart';
-import 'widget.dart';
+import 'supplier.dart';
 
-class MultiServiceWidget extends StatelessWidget {
-  final List<ServiceWidget> services;
+class MultiSupplier extends StatelessWidget {
+  final List<Supplier> services;
   final Widget child;
 
-  const MultiServiceWidget(
+  const MultiSupplier(
       {super.key, required this.services, required this.child});
 
   @override
   Widget build(BuildContext context) {
     Widget res = child;
     for (var i = services.length; i > 0; --i) {
-      res = ServiceWidget(
+      res = Supplier(
         init: services[i].init,
         child: res,
       );
